@@ -8,7 +8,10 @@ public class Configuracion {
   
   //------------------------Metodos------------------------//
 
-  public void cargarConfiguracion() {}
+  public void cargarConfiguracion() {
+   File archivo = new File("prod.txt");
+    //trabajando en los metodos al terminar actualizo en github
+  }
 
   public void guardarConfiguracion() {}
 

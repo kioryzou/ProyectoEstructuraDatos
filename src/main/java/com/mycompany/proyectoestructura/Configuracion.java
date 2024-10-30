@@ -54,7 +54,8 @@ public class Configuracion {
             }
             
             
-        } else {
+        } else { Note: //si lo prueban quiten de comentarios esta parte, igualmente no funciona todavia//
+            /*
             Scanner scanner = new Scanner(System.in);
           
             System.out.print("nombre del banco: ");
@@ -68,6 +69,7 @@ public class Configuracion {
             
             System.out.print("numero de caja rápida: ");
             CajaRapida = scanner.nextInt();
+            */
 
             //SE PODIA USAR ? "-", SI NO SOLO BORRAR EL "-"
             //ESTE NO FUNCIONA FALTA LA LOGICA EN EL METODO

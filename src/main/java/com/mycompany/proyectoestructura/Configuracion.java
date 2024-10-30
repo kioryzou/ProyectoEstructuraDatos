@@ -54,7 +54,7 @@ public class Configuracion {
             }
             
             
-        } else { Note: //si lo prueban quiten de comentarios esta parte, igualmente no funciona todavia//
+        } else { // Note: si lo prueban quiten de comentarios esta parte, igualmente no funciona todavia//
             /*
             Scanner scanner = new Scanner(System.in);
           

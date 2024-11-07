@@ -84,7 +84,6 @@ public class Configuracion {
 
 //Actualizacion de la clase configuracion
 //usar las que mejor les paresca
-
 package proyecto.estructuradatos;
 
 /*
@@ -93,8 +92,6 @@ package proyecto.estructuradatos;
  */
 
 
-
-//imports
 //imports
 import java.io.*;
 import javax.swing.JOptionPane;

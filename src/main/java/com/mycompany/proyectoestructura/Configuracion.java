@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author Kyo
  */
 
-
+/*
 public class Configuracion {
     private String NombreBanco;
     private int CajaPreferencial;
@@ -27,12 +27,12 @@ public class Configuracion {
     //diganme para arreglarlo y ver como hacerlo de otra manera
     
     public void Configuracion_LOAD(){
-/*
+
         Este metodo lo que esta supuesto a hacer es cargar la configuracion guardada en "Save.tx"
         si existe tendria que cargar los datos, si no deberia solicitar la info que se guardara en el save
         su funcionalidad esta dudosa, mas que me faltaria la logica de otro metodo y verificar, si no lo hare desde 0
 
-*/
+
 
         File CONF_FILE = new File("Save.txt");
 
@@ -55,7 +55,7 @@ public class Configuracion {
             
             
         } else { // Note: si lo prueban quiten de comentarios esta parte, igualmente no funciona todavia//
-            /*
+            
             Scanner scanner = new Scanner(System.in);
           
             System.out.print("nombre del banco: ");
@@ -69,7 +69,7 @@ public class Configuracion {
             
             System.out.print("numero de caja rápida: ");
             CajaRapida = scanner.nextInt();
-            */
+            
 
             //SE PODIA USAR ? "-", SI NO SOLO BORRAR EL "-"
             //ESTE NO FUNCIONA FALTA LA LOGICA EN EL METODO
@@ -79,8 +79,77 @@ public class Configuracion {
         
         
     
-    } //fin del meotodo Configuracion_LOAD
+    }//fin del meotodo Configuracion_LOAD
+    */
+
+//Actualizacion de la clase configuracion
+//usar las que mejor les paresca
+
+package proyecto.estructuradatos;
+
+
+//imports
+import java.io.*;
+import javax.swing.JOptionPane;
+
+public class Configuracion {
     
-    //falta agregar la logica de este metodo para que el metodo de arriba funcione
-    public void Configuracion_SAVE() {}
+    private static final String ConfigFiles = "Conf.txt";
+    
+    public void configurarSistema() 
+    {
+        
+        if (new File(ConfigFiles).exists()) {
+            cargarConfiguracion(); 
+            return;
+            
+        }
+
+        
+        String nombreBanco = JOptionPane.showInputDialog("Ingrese el nombre del banco:");
+        int totalCajas;
+        
+        do {
+            totalCajas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero total de cajas (NOTA:mínimo 3):"));
+        } while (totalCajas < 3);
+
+        int cajaPreferencial = 1; 
+        int cajaRapida = 2; 
+        String cajasGenerales = "3-" + totalCajas; 
+
+        try (PrintWriter pw = new PrintWriter(new FileWriter(ConfigFiles))) {
+            pw.println("Banco: " + nombreBanco);
+            pw.println("Cajas Totales: " + totalCajas);
+            pw.println("Caja Preferencial: " + cajaPreferencial);
+            pw.println("Caja Rápida: " + cajaRapida);
+            pw.println("Cajas Generales: " + cajasGenerales);
+            JOptionPane.showMessageDialog(null, "ConfiguraciOn guardada.");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error guardando la configuracion: " + e.getMessage());
+        }
+    }
+
+
+    //METODO CARGAR CONDIGURACION
+    public void cargarConfiguracion() {
+        try (BufferedReader br = new BufferedReader(new FileReader(ConfigFiles))) {
+            String linea;
+            StringBuilder configuracion = new StringBuilder();
+            while ((linea = br.readLine()) != null) {
+                configuracion.append(linea).append("\n");
+            }
+            JOptionPane.showMessageDialog(null, "Configuracion cargada:\n" + configuracion.toString());
+            
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error cargando configuracion: " + e.getMessage());
+        }
+    }
+    
+     
+    
 }
+
+
+
+    
+

@@ -95,6 +95,7 @@ package proyecto.estructuradatos;
 
 
 //imports
+//imports
 import java.io.*;
 import javax.swing.JOptionPane;
 
@@ -102,59 +103,76 @@ public class Configuracion {
     
     private static final String ConfigFiles = "Conf.txt";
     
-    public void configurarSistema() 
-    {
-        
+    public void configurarSistema() {
+     
         if (new File(ConfigFiles).exists()) {
-            cargarConfiguracion(); 
+            cargarConfiguracion();
             return;
+        }
+        
+    
+        String nombreBanco = JOptionPane.showInputDialog("Ingrese el nombre del banco:");
+        
+
+        int totalCajas;
+        do {
             
+            totalCajas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero total de cajas (NOTA: minimo 3):"));
+            
+        } while (totalCajas < 3);
+        
+       
+        int cajaPreferencial = 1;  
+        int cajaRapida = 2;    
+        int cajasGenerales = totalCajas - 2; 
+        
+ 
+        StringBuilder cajasGeneralesList = new StringBuilder();
+        
+        for (int i = 1; i <= cajasGenerales; i++) {
+            
+            cajasGeneralesList.append("Caja General " + i + "\n");
         }
 
+       
         
-        String nombreBanco = JOptionPane.showInputDialog("Ingrese el nombre del banco:");
-        int totalCajas;
+        try (PrintWriter pw = new PrintWriter(new FileWriter(ConfigFiles))) 
         
-        do {
-            totalCajas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero total de cajas (NOTA:mínimo 3):"));
-        } while (totalCajas < 3);
-
-        int cajaPreferencial = 1; 
-        int cajaRapida = 2; 
-        String cajasGenerales = "3-" + totalCajas; 
-
-        try (PrintWriter pw = new PrintWriter(new FileWriter(ConfigFiles))) {
+        {
             pw.println("Banco: " + nombreBanco);
             pw.println("Cajas Totales: " + totalCajas);
             pw.println("Caja Preferencial: " + cajaPreferencial);
             pw.println("Caja Rápida: " + cajaRapida);
-            pw.println("Cajas Generales: " + cajasGenerales);
-            JOptionPane.showMessageDialog(null, "ConfiguraciOn guardada.");
-        } catch (IOException e) {
+            pw.println("Cajas Generales:\n" + cajasGeneralesList.toString());
+            JOptionPane.showMessageDialog(null, "Configuracion guardada.");
+            
+        } catch (IOException e) 
+        {
             JOptionPane.showMessageDialog(null, "Error guardando la configuracion: " + e.getMessage());
         }
+        
+        
     }
 
-
-    //METODO CARGAR CONDIGURACION
+    // Metodo para cargar la configuracion
     public void cargarConfiguracion() {
         try (BufferedReader br = new BufferedReader(new FileReader(ConfigFiles))) {
+            
             String linea;
             StringBuilder configuracion = new StringBuilder();
-            while ((linea = br.readLine()) != null) {
-                configuracion.append(linea).append("\n");
+            while ((linea = br.readLine()) != null) 
+            {
+                configuracion.append(linea).append("\n");    
             }
-            JOptionPane.showMessageDialog(null, "Configuracion cargada:\n" + configuracion.toString());
             
-        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "configuracion cargada:\n" + configuracion.toString());
+            
+        } catch (IOException e) 
+        {
             JOptionPane.showMessageDialog(null, "Error cargando configuracion: " + e.getMessage());
         }
     }
-    
-     
-    
 }
-
 
 
     

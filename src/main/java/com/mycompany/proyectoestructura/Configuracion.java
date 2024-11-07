@@ -87,6 +87,12 @@ public class Configuracion {
 
 package proyecto.estructuradatos;
 
+/*
+ *
+ * @author Kyo
+ */
+
+
 
 //imports
 import java.io.*;
